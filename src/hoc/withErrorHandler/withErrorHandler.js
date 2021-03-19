@@ -8,7 +8,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
         state = {
             error: null,
         }
-        //why componentwillmount as error did not occur in didmount modal
+       
         componentWillMount() {
             this.reqInterceptor = axios.interceptors.request.use(req => {
                 this.setState({ error: null });
