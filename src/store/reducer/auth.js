@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 // import { logout } from '../actions/auth';
-import {updateObject} from '../utility';
+import {updateObject} from '../../shared/utility';
 const initailState={
     token:null,
     userId:null,
