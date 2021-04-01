@@ -1,5 +1,5 @@
 // import classes from '*.module.css';
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import Order from '../../components/Order/Order'
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
@@ -7,15 +7,18 @@ import * as actions from '../../store/actions/index';
 import {connect} from 'react-redux';
 import Spinner from '../../components/UI/Spinner/Spinner'
 // import order from '../../components/Order/Order';
-class Orders extends Component{
+const Orders=props=>{
+    const {onFetchedOrders,token,userId}=props;
+    useEffect(()=>{
+        onFetchedOrders(token,userId);
+
+    },[onFetchedOrders,token,userId])
+    //if i add props here [] then infinite loop why 
+
     
-    componentDidMount(){
-        this.props.onFetchedOrders(this.props.token,this.props.userId);
-    }
-    render(){
         let orders=<Spinner/>
-        if(!this.props.loading){
-           orders=( this.props.orders.map(order=>{
+        if(!props.loading){
+           orders=( props.orders.map(order=>{
                 return  <Order key={order.id} ingredients={order.ingredients} price={order.price}></Order>
               })
            );
@@ -26,7 +29,7 @@ class Orders extends Component{
 
          </div>   
         );
-    }
+    
 }
 
 const mapStateToProps=state=>{
